@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.HandlerWrapper;
 
-public class SampleHandler extends AbstractHandler {
+public class SampleHandler extends HandlerWrapper {
 
   final String greeting;
   final String body;

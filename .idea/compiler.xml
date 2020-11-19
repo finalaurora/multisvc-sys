@@ -16,7 +16,7 @@
       <module name="jetty-mw" target="14" />
       <module name="multisvc-sys" target="1.5" />
       <module name="thrift-server" target="8" />
-      <module name="thriftservicelib" target="6" />
+      <module name="thriftservicelib" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
