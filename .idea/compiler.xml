@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="thriftservicelib" />
+        <module name="multisvc-sys" />
+        <module name="thrift-server" />
+        <module name="jetty-mw" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jetty-mw" target="14" />
+      <module name="multisvc-sys" target="1.5" />
+      <module name="thrift-server" target="8" />
+      <module name="thriftservicelib" target="6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
