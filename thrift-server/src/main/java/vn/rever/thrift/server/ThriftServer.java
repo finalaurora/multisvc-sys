@@ -1,5 +1,7 @@
 package vn.rever.thrift.server;
 
+import static vn.rever.thrift.common.Definition.Constant;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -9,6 +11,7 @@ import org.apache.thrift.server.THsHaServer;
 import org.apache.thrift.server.THsHaServer.Args;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.transport.TFramedTransport;
+import org.apache.thrift.transport.TFramedTransport.Factory;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TNonblockingServerTransport;
 import org.slf4j.Logger;
@@ -42,15 +45,16 @@ public class ThriftServer {
    * @param processor Calculator processor for this simple server
    */
   public static void doStartServer(LeadService.Processor<Iface> processor) {
-    try (TNonblockingServerTransport serverTransport = new TNonblockingServerSocket(8088)) {
-      ExecutorService executor = new ThreadPoolExecutor(2, 10, 120, TimeUnit.SECONDS,
+    try (TNonblockingServerTransport serverTransport = new TNonblockingServerSocket(
+        Constant.THRIFT_SERVER_PORT)) {
+      ExecutorService executor = new ThreadPoolExecutor(2, Constant.MAX_THREAD_ALLOW, Constant.SERVER_KEEP_ALIVE_TIME,
+          TimeUnit.SECONDS,
           new ArrayBlockingQueue<>(10));
-      Args args;
-      args = new Args(serverTransport).maxWorkerThreads(10)
+      Args args = new Args(serverTransport).maxWorkerThreads(Constant.MAX_THREAD_ALLOW)
           .protocolFactory(new TBinaryProtocol.Factory())
           .inputTransportFactory(new TFramedTransport.Factory()).processor(processor)
+          .outputTransportFactory(new TFramedTransport.Factory())
           .executorService(executor);
-      serverTransport.listen();
       TServer server = new THsHaServer(args);
       logger.debug("Start server processing ...");
       server.serve();

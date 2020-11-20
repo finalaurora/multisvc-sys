@@ -1,12 +1,19 @@
 package jettymw.server;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import org.apache.thrift.TException;
 import org.eclipse.jetty.server.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vn.rever.thrift.client.ClientExecutor;
 import vn.rever.thrift.client.ThriftClient;
 
 public class JettyServer {
-  private static final int jettyPort = 8080;
+
+  private static final int JETTY_PORT = 8080;
 
   static Logger logger = LoggerFactory.getLogger(JettyServer.class);
 
@@ -19,11 +26,12 @@ public class JettyServer {
     return server;
   }
 
-  public static void main(String[] args) throws InterruptedException {
-    Thread jettyThread = new Thread(()->{
-      Server server = createServer(jettyPort);
+  public static void main(String[] args) {
+    Thread jettyThread = new Thread(() -> {
+      Server server = createServer(JETTY_PORT);
       try {
         server.start();
+        logger.debug("Jetty Server started");
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -35,21 +43,35 @@ public class JettyServer {
       }
     });
 
+    Thread thriftThread = new Thread(() -> {
+      try {
+        ExecutorService exec = Executors.newFixedThreadPool(12);
 
-    Thread thriftThread = new Thread(()->{
-      try{
-        ThriftClient tClient =  new ThriftClient();
-        tClient.connectServer();
-      }
-      catch (Exception ex)
-      {
+        List<Runnable> execWorks = new ArrayList<>();
+        for (int i = 0; i <= 12; i++) {
+          int finalI = i;
+          execWorks.add(() -> {
+            ThriftClient tClient = new ThriftClient();
+            tClient.connectServer();
+            ClientExecutor executor = new ClientExecutor(tClient.getClient());
+            try {
+              executor.doDemoWork();
+            } catch (TException e) {
+              e.printStackTrace();
+            }
+            logger.debug("Client {} connected", finalI);
+          });
+        }
+
+        execWorks.forEach(
+            exec::execute
+        );
+      } catch (Exception ex) {
         logger.error(ex.getMessage());
         ex.printStackTrace();
       }
     });
     jettyThread.start();
     thriftThread.start();
-    jettyThread.join();
-    thriftThread.join();
   }
 }
