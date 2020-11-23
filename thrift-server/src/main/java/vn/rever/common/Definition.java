@@ -1,13 +1,13 @@
-package vn.rever.thrift.common;
+package vn.rever.common;
 
 public class Definition {
   private Definition(){
 
   }
 
-  public static class Constant {
+  public static class ThriftConstant {
 
-    private Constant(){
+    private ThriftConstant(){
 
     }
 
@@ -25,5 +25,18 @@ public class Definition {
      * Predefined number of maximum allowed thread used for execution
      */
     public static final int MAX_THREAD_ALLOW = 5;
+  }
+
+  public static class MongoConstant{
+
+    /**
+     * MongoDB server instance connection port
+     */
+    public static  final int MONGO_PORT = 27017;
+
+    /**
+     * MongoDB database name
+     */
+    public static final String MONGO_DBNAME = "leadmanage";
   }
 }

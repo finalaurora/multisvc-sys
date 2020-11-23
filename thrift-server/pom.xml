@@ -13,13 +13,23 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>10</source>
+                    <target>10</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <mongodb-driver-sync.version>3.11.0</mongodb-driver-sync.version>
+    </properties>
     <dependencies>
+        <!-- Mongo DB -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>${mongodb-driver-sync.version}</version>
+        </dependency>
+        <!-- Mongo DB -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -35,6 +45,20 @@
             <artifactId>libthrift</artifactId>
             <version>0.10.0</version>
         </dependency>
+        <!-- Hibernate OGM -->
+        <dependency>
+            <groupId>org.hibernate.ogm</groupId>
+            <artifactId>hibernate-ogm-bom</artifactId>
+            <version>5.4.1.Final</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.ogm</groupId>
+            <artifactId>hibernate-ogm-mongodb</artifactId>
+            <version>5.4.1.Final</version>
+        </dependency>
+        <!-- Hibernate OGM -->
         <dependency>
             <groupId>groupId</groupId>
             <artifactId>thriftservicelib</artifactId>

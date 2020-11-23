@@ -329,7 +329,7 @@ public class Lead implements org.apache.thrift.TBase<Lead, Lead._Fields>, java.i
     return this.phoneNumber;
   }
 
-  public Lead setPhoneNumber(java.lang.String phoneNumber) {
+  public Lead setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
     return this;
   }

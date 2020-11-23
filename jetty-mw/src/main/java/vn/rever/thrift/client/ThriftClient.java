@@ -23,13 +23,12 @@ public class ThriftClient {
   public void connectServer()
   {
     try{
-      try (TNonblockingSocket socket = new TNonblockingSocket("localhost", 8088)) {
+      TNonblockingSocket socket = new TNonblockingSocket("localhost", 8088);
         TTransport framedTransport = new TFramedTransport(socket);
         logger.debug("Client socket created on port 8088");
         TAsyncClientManager async_CM = new TAsyncClientManager();
         client = new AsyncClient.Factory(async_CM, new TBinaryProtocol.Factory())
             .getAsyncClient(socket);
-      }
       logger.debug("Client transport opened .");
     }
     catch (Exception e) {
