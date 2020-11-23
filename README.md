@@ -40,20 +40,4 @@ Having trouble with Pages? Check out our [documentation](https://docs.github.com
 
 General flow of the modules
 
-```plantuml
-@startuml
-actor user
-participant frontend as "Front-End"
-participant jetty as "Jetty Server"
-participant tserver as "Thrift Server"
-database db as "Mongo DB"
-user -> frontend: Perform action
-frontend -> jetty: Send request by using API through XHR, REST
-jetty -> tserver: Service communication through Thrift framework
-tserver -> db: JPA access through Mongo driver
-db --> tserver: send back query data
-tserver --> jetty: Return objects through thrift communication
-jetty --> frontend: Serialize data and return JSON for front-end processing
-frontend --> user: Visualize data as web page
-@enduml
-```
+![Image](http://www.plantuml.com/plantuml/svg/LPB1Ri8m44Jl_eeLv-O7SgYWAbMBr1O1gdfrd4rY87QwtXJHh-_QWK1kiJCx-sQIUM1DtBT7fGrxWZuWgKwkhB6TTWmLUSVeIj01PY_na2rTEPjeziXyJe9LUjeY_I9DDHpIPLBj6h8LZx9IiovqG2YBzFhTkzh3yzDCHHh87aU87DP8bQSMXDPwfqOw4IMAN5pbIFZJOs0epfB8kXeMwpVWXdnVD_3zkdc0pNAxKmEup5xeyiHa3OBnRTixQtHSCqvUm2lIBPuy7TGrbLYKHGwhzKB838OmZWnXIh8YKn8mkzyM8ckXpG44byuGcxXvtZ9ja7jou8iz6hvvyu0pORrcchGcgQm-sZzC6q2dXfBbQllv0TBe8CuYJqS-9f3MxkeLk_WnSlYoeR-t2d320ZfTevgBKlwaVm00)

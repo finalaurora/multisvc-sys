@@ -1,0 +1,15 @@
+@startuml
+actor user
+participant frontend as "Front-End"
+participant jetty as "Jetty Server"
+participant tserver as "Thrift Server"
+database db as "Mongo DB"
+user -> frontend: Perform action
+frontend -> jetty: Send request by using API through XHR, REST
+jetty -> tserver: Service communication through Thrift framework
+tserver -> db: JPA access through Mongo driver
+db --> tserver: send back query data
+tserver --> jetty: Return objects through thrift communication
+jetty --> frontend: Serialize data and return JSON for front-end processing
+frontend --> user: Visualize data as web page
+@enduml
