@@ -24,27 +24,38 @@ struct Lead {
   9: i64 updatedDate
 }
 
+exception OperationalException {
+  1: string reason;
+  2: OperationalError type;
+}
+
+enum OperationalError{
+  SAME_ID_EXISTED
+  REQUESTED_ID_NOT_EXISTS
+  NO_RECORD_FOUND
+}
+
 service LeadService {
   /* Get all lead from current list */
-  map<UserId,Lead>  getAll(),
+  map<UserId,Lead>  getAll() throws (1: OperationalException opEx),
 
   /* Get lead by their id */
-  Lead getById(1:UserId id),
+  Lead getById(1:UserId id) throws (1: OperationalException opEx),
 
   /**
   * Add new lead to DB
 **/
-  void addNew(1:Lead newLead),
+  void addNew(1:Lead newLead) throws (1: OperationalException opEx),
 
   /**
   * Remove Lead from DB by their id
 **/
-  void removeById(1:UserId id)
+  void removeById(1:UserId id) throws (1: OperationalException opEx)
 
   /**
   * Update lead using new info
 **/
-  void updateLead(1:Lead lead)
+  void updateLead(1:Lead lead) throws (1: OperationalException opEx)
 
 }
 

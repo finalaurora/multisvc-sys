@@ -11,9 +11,9 @@ public class LeadService {
 
   public interface Iface {
 
-    public java.util.Map<java.lang.Long,Lead> getAll() throws org.apache.thrift.TException;
+    public java.util.Map<java.lang.Long,Lead> getAll() throws OperationalException, org.apache.thrift.TException;
 
-    public Lead getById(long id) throws org.apache.thrift.TException;
+    public Lead getById(long id) throws OperationalException, org.apache.thrift.TException;
 
     /**
      *   * Add new lead to DB
@@ -21,7 +21,7 @@ public class LeadService {
      * 
      * @param newLead
      */
-    public void addNew(Lead newLead) throws org.apache.thrift.TException;
+    public void addNew(Lead newLead) throws OperationalException, org.apache.thrift.TException;
 
     /**
      *   * Remove Lead from DB by their id
@@ -29,7 +29,7 @@ public class LeadService {
      * 
      * @param id
      */
-    public void removeById(long id) throws org.apache.thrift.TException;
+    public void removeById(long id) throws OperationalException, org.apache.thrift.TException;
 
     /**
      *   * Update lead using new info
@@ -37,7 +37,7 @@ public class LeadService {
      * 
      * @param lead
      */
-    public void updateLead(Lead lead) throws org.apache.thrift.TException;
+    public void updateLead(Lead lead) throws OperationalException, org.apache.thrift.TException;
 
   }
 
@@ -75,7 +75,7 @@ public class LeadService {
       super(iprot, oprot);
     }
 
-    public java.util.Map<java.lang.Long,Lead> getAll() throws org.apache.thrift.TException
+    public java.util.Map<java.lang.Long,Lead> getAll() throws OperationalException, org.apache.thrift.TException
     {
       send_getAll();
       return recv_getAll();
@@ -87,17 +87,20 @@ public class LeadService {
       sendBase("getAll", args);
     }
 
-    public java.util.Map<java.lang.Long,Lead> recv_getAll() throws org.apache.thrift.TException
+    public java.util.Map<java.lang.Long,Lead> recv_getAll() throws OperationalException, org.apache.thrift.TException
     {
       getAll_result result = new getAll_result();
       receiveBase(result, "getAll");
       if (result.isSetSuccess()) {
         return result.success;
       }
+      if (result.opEx != null) {
+        throw result.opEx;
+      }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getAll failed: unknown result");
     }
 
-    public Lead getById(long id) throws org.apache.thrift.TException
+    public Lead getById(long id) throws OperationalException, org.apache.thrift.TException
     {
       send_getById(id);
       return recv_getById();
@@ -110,17 +113,20 @@ public class LeadService {
       sendBase("getById", args);
     }
 
-    public Lead recv_getById() throws org.apache.thrift.TException
+    public Lead recv_getById() throws OperationalException, org.apache.thrift.TException
     {
       getById_result result = new getById_result();
       receiveBase(result, "getById");
       if (result.isSetSuccess()) {
         return result.success;
       }
+      if (result.opEx != null) {
+        throw result.opEx;
+      }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getById failed: unknown result");
     }
 
-    public void addNew(Lead newLead) throws org.apache.thrift.TException
+    public void addNew(Lead newLead) throws OperationalException, org.apache.thrift.TException
     {
       send_addNew(newLead);
       recv_addNew();
@@ -133,14 +139,17 @@ public class LeadService {
       sendBase("addNew", args);
     }
 
-    public void recv_addNew() throws org.apache.thrift.TException
+    public void recv_addNew() throws OperationalException, org.apache.thrift.TException
     {
       addNew_result result = new addNew_result();
       receiveBase(result, "addNew");
+      if (result.opEx != null) {
+        throw result.opEx;
+      }
       return;
     }
 
-    public void removeById(long id) throws org.apache.thrift.TException
+    public void removeById(long id) throws OperationalException, org.apache.thrift.TException
     {
       send_removeById(id);
       recv_removeById();
@@ -153,14 +162,17 @@ public class LeadService {
       sendBase("removeById", args);
     }
 
-    public void recv_removeById() throws org.apache.thrift.TException
+    public void recv_removeById() throws OperationalException, org.apache.thrift.TException
     {
       removeById_result result = new removeById_result();
       receiveBase(result, "removeById");
+      if (result.opEx != null) {
+        throw result.opEx;
+      }
       return;
     }
 
-    public void updateLead(Lead lead) throws org.apache.thrift.TException
+    public void updateLead(Lead lead) throws OperationalException, org.apache.thrift.TException
     {
       send_updateLead(lead);
       recv_updateLead();
@@ -173,10 +185,13 @@ public class LeadService {
       sendBase("updateLead", args);
     }
 
-    public void recv_updateLead() throws org.apache.thrift.TException
+    public void recv_updateLead() throws OperationalException, org.apache.thrift.TException
     {
       updateLead_result result = new updateLead_result();
       receiveBase(result, "updateLead");
+      if (result.opEx != null) {
+        throw result.opEx;
+      }
       return;
     }
 
@@ -217,7 +232,7 @@ public class LeadService {
         prot.writeMessageEnd();
       }
 
-      public java.util.Map<java.lang.Long,Lead> getResult() throws org.apache.thrift.TException {
+      public java.util.Map<java.lang.Long,Lead> getResult() throws OperationalException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -249,7 +264,7 @@ public class LeadService {
         prot.writeMessageEnd();
       }
 
-      public Lead getResult() throws org.apache.thrift.TException {
+      public Lead getResult() throws OperationalException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -281,7 +296,7 @@ public class LeadService {
         prot.writeMessageEnd();
       }
 
-      public Void getResult() throws org.apache.thrift.TException {
+      public Void getResult() throws OperationalException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -313,7 +328,7 @@ public class LeadService {
         prot.writeMessageEnd();
       }
 
-      public Void getResult() throws org.apache.thrift.TException {
+      public Void getResult() throws OperationalException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -345,7 +360,7 @@ public class LeadService {
         prot.writeMessageEnd();
       }
 
-      public Void getResult() throws org.apache.thrift.TException {
+      public Void getResult() throws OperationalException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -391,7 +406,11 @@ public class LeadService {
 
       public getAll_result getResult(I iface, getAll_args args) throws org.apache.thrift.TException {
         getAll_result result = new getAll_result();
-        result.success = iface.getAll();
+        try {
+          result.success = iface.getAll();
+        } catch (OperationalException opEx) {
+          result.opEx = opEx;
+        }
         return result;
       }
     }
@@ -411,7 +430,11 @@ public class LeadService {
 
       public getById_result getResult(I iface, getById_args args) throws org.apache.thrift.TException {
         getById_result result = new getById_result();
-        result.success = iface.getById(args.id);
+        try {
+          result.success = iface.getById(args.id);
+        } catch (OperationalException opEx) {
+          result.opEx = opEx;
+        }
         return result;
       }
     }
@@ -431,7 +454,11 @@ public class LeadService {
 
       public addNew_result getResult(I iface, addNew_args args) throws org.apache.thrift.TException {
         addNew_result result = new addNew_result();
-        iface.addNew(args.newLead);
+        try {
+          iface.addNew(args.newLead);
+        } catch (OperationalException opEx) {
+          result.opEx = opEx;
+        }
         return result;
       }
     }
@@ -451,7 +478,11 @@ public class LeadService {
 
       public removeById_result getResult(I iface, removeById_args args) throws org.apache.thrift.TException {
         removeById_result result = new removeById_result();
-        iface.removeById(args.id);
+        try {
+          iface.removeById(args.id);
+        } catch (OperationalException opEx) {
+          result.opEx = opEx;
+        }
         return result;
       }
     }
@@ -471,7 +502,11 @@ public class LeadService {
 
       public updateLead_result getResult(I iface, updateLead_args args) throws org.apache.thrift.TException {
         updateLead_result result = new updateLead_result();
-        iface.updateLead(args.lead);
+        try {
+          iface.updateLead(args.lead);
+        } catch (OperationalException opEx) {
+          result.opEx = opEx;
+        }
         return result;
       }
     }
@@ -526,7 +561,11 @@ public class LeadService {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
             getAll_result result = new getAll_result();
-            if (e instanceof org.apache.thrift.transport.TTransportException) {
+            if (e instanceof OperationalException) {
+              result.opEx = (OperationalException) e;
+              result.setOpExIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
               return;
@@ -587,7 +626,11 @@ public class LeadService {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
             getById_result result = new getById_result();
-            if (e instanceof org.apache.thrift.transport.TTransportException) {
+            if (e instanceof OperationalException) {
+              result.opEx = (OperationalException) e;
+              result.setOpExIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
               return;
@@ -647,7 +690,11 @@ public class LeadService {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
             addNew_result result = new addNew_result();
-            if (e instanceof org.apache.thrift.transport.TTransportException) {
+            if (e instanceof OperationalException) {
+              result.opEx = (OperationalException) e;
+              result.setOpExIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
               return;
@@ -707,7 +754,11 @@ public class LeadService {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
             removeById_result result = new removeById_result();
-            if (e instanceof org.apache.thrift.transport.TTransportException) {
+            if (e instanceof OperationalException) {
+              result.opEx = (OperationalException) e;
+              result.setOpExIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
               return;
@@ -767,7 +818,11 @@ public class LeadService {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
             updateLead_result result = new updateLead_result();
-            if (e instanceof org.apache.thrift.transport.TTransportException) {
+            if (e instanceof OperationalException) {
+              result.opEx = (OperationalException) e;
+              result.setOpExIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
               fb.close();
               return;
@@ -1055,15 +1110,18 @@ public class LeadService {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getAll_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.MAP, (short)0);
+    private static final org.apache.thrift.protocol.TField OP_EX_FIELD_DESC = new org.apache.thrift.protocol.TField("opEx", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getAll_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getAll_resultTupleSchemeFactory();
 
     public java.util.Map<java.lang.Long,Lead> success; // required
+    public OperationalException opEx; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SUCCESS((short)0, "success");
+      SUCCESS((short)0, "success"),
+      OP_EX((short)1, "opEx");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -1080,6 +1138,8 @@ public class LeadService {
         switch(fieldId) {
           case 0: // SUCCESS
             return SUCCESS;
+          case 1: // OP_EX
+            return OP_EX;
           default:
             return null;
         }
@@ -1127,6 +1187,8 @@ public class LeadService {
           new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
               new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64              , "UserId"), 
               new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Lead.class))));
+      tmpMap.put(_Fields.OP_EX, new org.apache.thrift.meta_data.FieldMetaData("opEx", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, OperationalException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getAll_result.class, metaDataMap);
     }
@@ -1135,10 +1197,12 @@ public class LeadService {
     }
 
     public getAll_result(
-      java.util.Map<java.lang.Long,Lead> success)
+      java.util.Map<java.lang.Long,Lead> success,
+      OperationalException opEx)
     {
       this();
       this.success = success;
+      this.opEx = opEx;
     }
 
     /**
@@ -1160,6 +1224,9 @@ public class LeadService {
         }
         this.success = __this__success;
       }
+      if (other.isSetOpEx()) {
+        this.opEx = new OperationalException(other.opEx);
+      }
     }
 
     public getAll_result deepCopy() {
@@ -1169,6 +1236,7 @@ public class LeadService {
     @Override
     public void clear() {
       this.success = null;
+      this.opEx = null;
     }
 
     public int getSuccessSize() {
@@ -1206,6 +1274,30 @@ public class LeadService {
       }
     }
 
+    public OperationalException getOpEx() {
+      return this.opEx;
+    }
+
+    public getAll_result setOpEx(OperationalException opEx) {
+      this.opEx = opEx;
+      return this;
+    }
+
+    public void unsetOpEx() {
+      this.opEx = null;
+    }
+
+    /** Returns true if field opEx is set (has been assigned a value) and false otherwise */
+    public boolean isSetOpEx() {
+      return this.opEx != null;
+    }
+
+    public void setOpExIsSet(boolean value) {
+      if (!value) {
+        this.opEx = null;
+      }
+    }
+
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
       case SUCCESS:
@@ -1216,6 +1308,14 @@ public class LeadService {
         }
         break;
 
+      case OP_EX:
+        if (value == null) {
+          unsetOpEx();
+        } else {
+          setOpEx((OperationalException)value);
+        }
+        break;
+
       }
     }
 
@@ -1223,6 +1323,9 @@ public class LeadService {
       switch (field) {
       case SUCCESS:
         return getSuccess();
+
+      case OP_EX:
+        return getOpEx();
 
       }
       throw new java.lang.IllegalStateException();
@@ -1237,6 +1340,8 @@ public class LeadService {
       switch (field) {
       case SUCCESS:
         return isSetSuccess();
+      case OP_EX:
+        return isSetOpEx();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -1265,6 +1370,15 @@ public class LeadService {
           return false;
       }
 
+      boolean this_present_opEx = true && this.isSetOpEx();
+      boolean that_present_opEx = true && that.isSetOpEx();
+      if (this_present_opEx || that_present_opEx) {
+        if (!(this_present_opEx && that_present_opEx))
+          return false;
+        if (!this.opEx.equals(that.opEx))
+          return false;
+      }
+
       return true;
     }
 
@@ -1275,6 +1389,10 @@ public class LeadService {
       hashCode = hashCode * 8191 + ((isSetSuccess()) ? 131071 : 524287);
       if (isSetSuccess())
         hashCode = hashCode * 8191 + success.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetOpEx()) ? 131071 : 524287);
+      if (isSetOpEx())
+        hashCode = hashCode * 8191 + opEx.hashCode();
 
       return hashCode;
     }
@@ -1293,6 +1411,16 @@ public class LeadService {
       }
       if (isSetSuccess()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOpEx()).compareTo(other.isSetOpEx());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOpEx()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.opEx, other.opEx);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -1322,6 +1450,14 @@ public class LeadService {
         sb.append("null");
       } else {
         sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("opEx:");
+      if (this.opEx == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.opEx);
       }
       first = false;
       sb.append(")");
@@ -1388,6 +1524,15 @@ public class LeadService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 1: // OP_EX
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.opEx = new OperationalException();
+                struct.opEx.read(iprot);
+                struct.setOpExIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -1416,6 +1561,11 @@ public class LeadService {
           }
           oprot.writeFieldEnd();
         }
+        if (struct.opEx != null) {
+          oprot.writeFieldBegin(OP_EX_FIELD_DESC);
+          struct.opEx.write(oprot);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -1437,7 +1587,10 @@ public class LeadService {
         if (struct.isSetSuccess()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetOpEx()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
@@ -1448,12 +1601,15 @@ public class LeadService {
             }
           }
         }
+        if (struct.isSetOpEx()) {
+          struct.opEx.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, getAll_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(1);
+        java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
             org.apache.thrift.protocol.TMap _map6 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I64, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
@@ -1469,6 +1625,11 @@ public class LeadService {
             }
           }
           struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.opEx = new OperationalException();
+          struct.opEx.read(iprot);
+          struct.setOpExIsSet(true);
         }
       }
     }
@@ -1840,15 +2001,18 @@ public class LeadService {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getById_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField OP_EX_FIELD_DESC = new org.apache.thrift.protocol.TField("opEx", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getById_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getById_resultTupleSchemeFactory();
 
     public Lead success; // required
+    public OperationalException opEx; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SUCCESS((short)0, "success");
+      SUCCESS((short)0, "success"),
+      OP_EX((short)1, "opEx");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -1865,6 +2029,8 @@ public class LeadService {
         switch(fieldId) {
           case 0: // SUCCESS
             return SUCCESS;
+          case 1: // OP_EX
+            return OP_EX;
           default:
             return null;
         }
@@ -1910,6 +2076,8 @@ public class LeadService {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Lead.class)));
+      tmpMap.put(_Fields.OP_EX, new org.apache.thrift.meta_data.FieldMetaData("opEx", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, OperationalException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getById_result.class, metaDataMap);
     }
@@ -1918,10 +2086,12 @@ public class LeadService {
     }
 
     public getById_result(
-      Lead success)
+      Lead success,
+      OperationalException opEx)
     {
       this();
       this.success = success;
+      this.opEx = opEx;
     }
 
     /**
@@ -1930,6 +2100,9 @@ public class LeadService {
     public getById_result(getById_result other) {
       if (other.isSetSuccess()) {
         this.success = new Lead(other.success);
+      }
+      if (other.isSetOpEx()) {
+        this.opEx = new OperationalException(other.opEx);
       }
     }
 
@@ -1940,6 +2113,7 @@ public class LeadService {
     @Override
     public void clear() {
       this.success = null;
+      this.opEx = null;
     }
 
     public Lead getSuccess() {
@@ -1966,6 +2140,30 @@ public class LeadService {
       }
     }
 
+    public OperationalException getOpEx() {
+      return this.opEx;
+    }
+
+    public getById_result setOpEx(OperationalException opEx) {
+      this.opEx = opEx;
+      return this;
+    }
+
+    public void unsetOpEx() {
+      this.opEx = null;
+    }
+
+    /** Returns true if field opEx is set (has been assigned a value) and false otherwise */
+    public boolean isSetOpEx() {
+      return this.opEx != null;
+    }
+
+    public void setOpExIsSet(boolean value) {
+      if (!value) {
+        this.opEx = null;
+      }
+    }
+
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
       case SUCCESS:
@@ -1976,6 +2174,14 @@ public class LeadService {
         }
         break;
 
+      case OP_EX:
+        if (value == null) {
+          unsetOpEx();
+        } else {
+          setOpEx((OperationalException)value);
+        }
+        break;
+
       }
     }
 
@@ -1983,6 +2189,9 @@ public class LeadService {
       switch (field) {
       case SUCCESS:
         return getSuccess();
+
+      case OP_EX:
+        return getOpEx();
 
       }
       throw new java.lang.IllegalStateException();
@@ -1997,6 +2206,8 @@ public class LeadService {
       switch (field) {
       case SUCCESS:
         return isSetSuccess();
+      case OP_EX:
+        return isSetOpEx();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -2025,6 +2236,15 @@ public class LeadService {
           return false;
       }
 
+      boolean this_present_opEx = true && this.isSetOpEx();
+      boolean that_present_opEx = true && that.isSetOpEx();
+      if (this_present_opEx || that_present_opEx) {
+        if (!(this_present_opEx && that_present_opEx))
+          return false;
+        if (!this.opEx.equals(that.opEx))
+          return false;
+      }
+
       return true;
     }
 
@@ -2035,6 +2255,10 @@ public class LeadService {
       hashCode = hashCode * 8191 + ((isSetSuccess()) ? 131071 : 524287);
       if (isSetSuccess())
         hashCode = hashCode * 8191 + success.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetOpEx()) ? 131071 : 524287);
+      if (isSetOpEx())
+        hashCode = hashCode * 8191 + opEx.hashCode();
 
       return hashCode;
     }
@@ -2053,6 +2277,16 @@ public class LeadService {
       }
       if (isSetSuccess()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOpEx()).compareTo(other.isSetOpEx());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOpEx()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.opEx, other.opEx);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -2082,6 +2316,14 @@ public class LeadService {
         sb.append("null");
       } else {
         sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("opEx:");
+      if (this.opEx == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.opEx);
       }
       first = false;
       sb.append(")");
@@ -2139,6 +2381,15 @@ public class LeadService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 1: // OP_EX
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.opEx = new OperationalException();
+                struct.opEx.read(iprot);
+                struct.setOpExIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -2157,6 +2408,11 @@ public class LeadService {
         if (struct.success != null) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.opEx != null) {
+          oprot.writeFieldBegin(OP_EX_FIELD_DESC);
+          struct.opEx.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -2180,20 +2436,31 @@ public class LeadService {
         if (struct.isSetSuccess()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetOpEx()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
         if (struct.isSetSuccess()) {
           struct.success.write(oprot);
+        }
+        if (struct.isSetOpEx()) {
+          struct.opEx.write(oprot);
         }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, getById_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(1);
+        java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           struct.success = new Lead();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.opEx = new OperationalException();
+          struct.opEx.read(iprot);
+          struct.setOpExIsSet(true);
         }
       }
     }
@@ -2573,14 +2840,16 @@ public class LeadService {
   public static class addNew_result implements org.apache.thrift.TBase<addNew_result, addNew_result._Fields>, java.io.Serializable, Cloneable, Comparable<addNew_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addNew_result");
 
+    private static final org.apache.thrift.protocol.TField OP_EX_FIELD_DESC = new org.apache.thrift.protocol.TField("opEx", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new addNew_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new addNew_resultTupleSchemeFactory();
 
+    public OperationalException opEx; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      OP_EX((short)1, "opEx");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -2595,6 +2864,8 @@ public class LeadService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 1: // OP_EX
+            return OP_EX;
           default:
             return null;
         }
@@ -2633,9 +2904,13 @@ public class LeadService {
         return _fieldName;
       }
     }
+
+    // isset id assignments
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.OP_EX, new org.apache.thrift.meta_data.FieldMetaData("opEx", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, OperationalException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addNew_result.class, metaDataMap);
     }
@@ -2643,10 +2918,20 @@ public class LeadService {
     public addNew_result() {
     }
 
+    public addNew_result(
+      OperationalException opEx)
+    {
+      this();
+      this.opEx = opEx;
+    }
+
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public addNew_result(addNew_result other) {
+      if (other.isSetOpEx()) {
+        this.opEx = new OperationalException(other.opEx);
+      }
     }
 
     public addNew_result deepCopy() {
@@ -2655,15 +2940,51 @@ public class LeadService {
 
     @Override
     public void clear() {
+      this.opEx = null;
+    }
+
+    public OperationalException getOpEx() {
+      return this.opEx;
+    }
+
+    public addNew_result setOpEx(OperationalException opEx) {
+      this.opEx = opEx;
+      return this;
+    }
+
+    public void unsetOpEx() {
+      this.opEx = null;
+    }
+
+    /** Returns true if field opEx is set (has been assigned a value) and false otherwise */
+    public boolean isSetOpEx() {
+      return this.opEx != null;
+    }
+
+    public void setOpExIsSet(boolean value) {
+      if (!value) {
+        this.opEx = null;
+      }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
+      case OP_EX:
+        if (value == null) {
+          unsetOpEx();
+        } else {
+          setOpEx((OperationalException)value);
+        }
+        break;
+
       }
     }
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
+      case OP_EX:
+        return getOpEx();
+
       }
       throw new java.lang.IllegalStateException();
     }
@@ -2675,6 +2996,8 @@ public class LeadService {
       }
 
       switch (field) {
+      case OP_EX:
+        return isSetOpEx();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -2694,12 +3017,25 @@ public class LeadService {
       if (this == that)
         return true;
 
+      boolean this_present_opEx = true && this.isSetOpEx();
+      boolean that_present_opEx = true && that.isSetOpEx();
+      if (this_present_opEx || that_present_opEx) {
+        if (!(this_present_opEx && that_present_opEx))
+          return false;
+        if (!this.opEx.equals(that.opEx))
+          return false;
+      }
+
       return true;
     }
 
     @Override
     public int hashCode() {
       int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetOpEx()) ? 131071 : 524287);
+      if (isSetOpEx())
+        hashCode = hashCode * 8191 + opEx.hashCode();
 
       return hashCode;
     }
@@ -2712,6 +3048,16 @@ public class LeadService {
 
       int lastComparison = 0;
 
+      lastComparison = java.lang.Boolean.valueOf(isSetOpEx()).compareTo(other.isSetOpEx());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOpEx()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.opEx, other.opEx);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -2732,6 +3078,13 @@ public class LeadService {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("addNew_result(");
       boolean first = true;
 
+      sb.append("opEx:");
+      if (this.opEx == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.opEx);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -2775,6 +3128,15 @@ public class LeadService {
             break;
           }
           switch (schemeField.id) {
+            case 1: // OP_EX
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.opEx = new OperationalException();
+                struct.opEx.read(iprot);
+                struct.setOpExIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -2790,6 +3152,11 @@ public class LeadService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.opEx != null) {
+          oprot.writeFieldBegin(OP_EX_FIELD_DESC);
+          struct.opEx.write(oprot);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -2807,11 +3174,25 @@ public class LeadService {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, addNew_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetOpEx()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetOpEx()) {
+          struct.opEx.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, addNew_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.opEx = new OperationalException();
+          struct.opEx.read(iprot);
+          struct.setOpExIsSet(true);
+        }
       }
     }
 
@@ -3181,14 +3562,16 @@ public class LeadService {
   public static class removeById_result implements org.apache.thrift.TBase<removeById_result, removeById_result._Fields>, java.io.Serializable, Cloneable, Comparable<removeById_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("removeById_result");
 
+    private static final org.apache.thrift.protocol.TField OP_EX_FIELD_DESC = new org.apache.thrift.protocol.TField("opEx", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new removeById_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new removeById_resultTupleSchemeFactory();
 
+    public OperationalException opEx; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      OP_EX((short)1, "opEx");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -3203,6 +3586,8 @@ public class LeadService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 1: // OP_EX
+            return OP_EX;
           default:
             return null;
         }
@@ -3241,9 +3626,13 @@ public class LeadService {
         return _fieldName;
       }
     }
+
+    // isset id assignments
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.OP_EX, new org.apache.thrift.meta_data.FieldMetaData("opEx", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, OperationalException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(removeById_result.class, metaDataMap);
     }
@@ -3251,10 +3640,20 @@ public class LeadService {
     public removeById_result() {
     }
 
+    public removeById_result(
+      OperationalException opEx)
+    {
+      this();
+      this.opEx = opEx;
+    }
+
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public removeById_result(removeById_result other) {
+      if (other.isSetOpEx()) {
+        this.opEx = new OperationalException(other.opEx);
+      }
     }
 
     public removeById_result deepCopy() {
@@ -3263,15 +3662,51 @@ public class LeadService {
 
     @Override
     public void clear() {
+      this.opEx = null;
+    }
+
+    public OperationalException getOpEx() {
+      return this.opEx;
+    }
+
+    public removeById_result setOpEx(OperationalException opEx) {
+      this.opEx = opEx;
+      return this;
+    }
+
+    public void unsetOpEx() {
+      this.opEx = null;
+    }
+
+    /** Returns true if field opEx is set (has been assigned a value) and false otherwise */
+    public boolean isSetOpEx() {
+      return this.opEx != null;
+    }
+
+    public void setOpExIsSet(boolean value) {
+      if (!value) {
+        this.opEx = null;
+      }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
+      case OP_EX:
+        if (value == null) {
+          unsetOpEx();
+        } else {
+          setOpEx((OperationalException)value);
+        }
+        break;
+
       }
     }
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
+      case OP_EX:
+        return getOpEx();
+
       }
       throw new java.lang.IllegalStateException();
     }
@@ -3283,6 +3718,8 @@ public class LeadService {
       }
 
       switch (field) {
+      case OP_EX:
+        return isSetOpEx();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -3302,12 +3739,25 @@ public class LeadService {
       if (this == that)
         return true;
 
+      boolean this_present_opEx = true && this.isSetOpEx();
+      boolean that_present_opEx = true && that.isSetOpEx();
+      if (this_present_opEx || that_present_opEx) {
+        if (!(this_present_opEx && that_present_opEx))
+          return false;
+        if (!this.opEx.equals(that.opEx))
+          return false;
+      }
+
       return true;
     }
 
     @Override
     public int hashCode() {
       int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetOpEx()) ? 131071 : 524287);
+      if (isSetOpEx())
+        hashCode = hashCode * 8191 + opEx.hashCode();
 
       return hashCode;
     }
@@ -3320,6 +3770,16 @@ public class LeadService {
 
       int lastComparison = 0;
 
+      lastComparison = java.lang.Boolean.valueOf(isSetOpEx()).compareTo(other.isSetOpEx());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOpEx()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.opEx, other.opEx);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -3340,6 +3800,13 @@ public class LeadService {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("removeById_result(");
       boolean first = true;
 
+      sb.append("opEx:");
+      if (this.opEx == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.opEx);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -3383,6 +3850,15 @@ public class LeadService {
             break;
           }
           switch (schemeField.id) {
+            case 1: // OP_EX
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.opEx = new OperationalException();
+                struct.opEx.read(iprot);
+                struct.setOpExIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -3398,6 +3874,11 @@ public class LeadService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.opEx != null) {
+          oprot.writeFieldBegin(OP_EX_FIELD_DESC);
+          struct.opEx.write(oprot);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -3415,11 +3896,25 @@ public class LeadService {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, removeById_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetOpEx()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetOpEx()) {
+          struct.opEx.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, removeById_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.opEx = new OperationalException();
+          struct.opEx.read(iprot);
+          struct.setOpExIsSet(true);
+        }
       }
     }
 
@@ -3798,14 +4293,16 @@ public class LeadService {
   public static class updateLead_result implements org.apache.thrift.TBase<updateLead_result, updateLead_result._Fields>, java.io.Serializable, Cloneable, Comparable<updateLead_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("updateLead_result");
 
+    private static final org.apache.thrift.protocol.TField OP_EX_FIELD_DESC = new org.apache.thrift.protocol.TField("opEx", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new updateLead_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new updateLead_resultTupleSchemeFactory();
 
+    public OperationalException opEx; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      OP_EX((short)1, "opEx");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -3820,6 +4317,8 @@ public class LeadService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 1: // OP_EX
+            return OP_EX;
           default:
             return null;
         }
@@ -3858,9 +4357,13 @@ public class LeadService {
         return _fieldName;
       }
     }
+
+    // isset id assignments
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.OP_EX, new org.apache.thrift.meta_data.FieldMetaData("opEx", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, OperationalException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(updateLead_result.class, metaDataMap);
     }
@@ -3868,10 +4371,20 @@ public class LeadService {
     public updateLead_result() {
     }
 
+    public updateLead_result(
+      OperationalException opEx)
+    {
+      this();
+      this.opEx = opEx;
+    }
+
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public updateLead_result(updateLead_result other) {
+      if (other.isSetOpEx()) {
+        this.opEx = new OperationalException(other.opEx);
+      }
     }
 
     public updateLead_result deepCopy() {
@@ -3880,15 +4393,51 @@ public class LeadService {
 
     @Override
     public void clear() {
+      this.opEx = null;
+    }
+
+    public OperationalException getOpEx() {
+      return this.opEx;
+    }
+
+    public updateLead_result setOpEx(OperationalException opEx) {
+      this.opEx = opEx;
+      return this;
+    }
+
+    public void unsetOpEx() {
+      this.opEx = null;
+    }
+
+    /** Returns true if field opEx is set (has been assigned a value) and false otherwise */
+    public boolean isSetOpEx() {
+      return this.opEx != null;
+    }
+
+    public void setOpExIsSet(boolean value) {
+      if (!value) {
+        this.opEx = null;
+      }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
+      case OP_EX:
+        if (value == null) {
+          unsetOpEx();
+        } else {
+          setOpEx((OperationalException)value);
+        }
+        break;
+
       }
     }
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
+      case OP_EX:
+        return getOpEx();
+
       }
       throw new java.lang.IllegalStateException();
     }
@@ -3900,6 +4449,8 @@ public class LeadService {
       }
 
       switch (field) {
+      case OP_EX:
+        return isSetOpEx();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -3919,12 +4470,25 @@ public class LeadService {
       if (this == that)
         return true;
 
+      boolean this_present_opEx = true && this.isSetOpEx();
+      boolean that_present_opEx = true && that.isSetOpEx();
+      if (this_present_opEx || that_present_opEx) {
+        if (!(this_present_opEx && that_present_opEx))
+          return false;
+        if (!this.opEx.equals(that.opEx))
+          return false;
+      }
+
       return true;
     }
 
     @Override
     public int hashCode() {
       int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetOpEx()) ? 131071 : 524287);
+      if (isSetOpEx())
+        hashCode = hashCode * 8191 + opEx.hashCode();
 
       return hashCode;
     }
@@ -3937,6 +4501,16 @@ public class LeadService {
 
       int lastComparison = 0;
 
+      lastComparison = java.lang.Boolean.valueOf(isSetOpEx()).compareTo(other.isSetOpEx());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOpEx()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.opEx, other.opEx);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -3957,6 +4531,13 @@ public class LeadService {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("updateLead_result(");
       boolean first = true;
 
+      sb.append("opEx:");
+      if (this.opEx == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.opEx);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -4000,6 +4581,15 @@ public class LeadService {
             break;
           }
           switch (schemeField.id) {
+            case 1: // OP_EX
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.opEx = new OperationalException();
+                struct.opEx.read(iprot);
+                struct.setOpExIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -4015,6 +4605,11 @@ public class LeadService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.opEx != null) {
+          oprot.writeFieldBegin(OP_EX_FIELD_DESC);
+          struct.opEx.write(oprot);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -4032,11 +4627,25 @@ public class LeadService {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, updateLead_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetOpEx()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetOpEx()) {
+          struct.opEx.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, updateLead_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.opEx = new OperationalException();
+          struct.opEx.read(iprot);
+          struct.setOpExIsSet(true);
+        }
       }
     }
 

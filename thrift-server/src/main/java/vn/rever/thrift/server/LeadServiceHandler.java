@@ -2,16 +2,21 @@ package vn.rever.thrift.server;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import com.mongodb.MongoException;
+import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import org.apache.thrift.TApplicationException;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vn.rever.data.entity.LeadEntity;
 import vn.rever.thrift.leadservice.Lead;
 import vn.rever.thrift.leadservice.LeadService.Iface;
+import vn.rever.thrift.leadservice.OperationalError;
+import vn.rever.thrift.leadservice.OperationalException;
 
 public class LeadServiceHandler implements Iface {
 
@@ -32,20 +37,30 @@ public class LeadServiceHandler implements Iface {
     HashMap<Long, Lead> resultColl = new HashMap<>();
     mongoCollection.find().forEach(
         (Consumer<LeadEntity>)  entity -> resultColl.put(entity.id,entity.toLead()));
+    if(resultColl.size() == 0){
+      throw new OperationalException("No record found.", OperationalError.NO_RECORD_FOUND);
+    }
     return resultColl;
   }
 
   public Lead getById(long id) throws TException {
     logger.debug("getById - Get lead with id={}", id);
-    return mongoCollection.find(eq("id",String.valueOf(id))).first().toLead();
+    try{
+    return mongoCollection.find(eq("id",id)).first().toLead();}
+    catch (MongoException ex){
+      throw new OperationalException("Requested ID not exists",OperationalError.REQUESTED_ID_NOT_EXISTS);
+    }
   }
 
   public void addNew(Lead newLead) throws TException {
-    if (getById(newLead.id) == null) {
+    try{
       mongoCollection.insertOne(LeadEntity.fromLead(newLead));
       logger.debug("New Lead added id = {}, lead = {}",newLead.id,newLead);
-    } else {
-      throw new TException("Lead with same id has existed in current list collection", new IllegalStateException());
+    } catch (MongoWriteException ex){
+      throw new TException("Lead with same id has existed in current list collection", ex);
+    } catch (Exception ex)
+    {
+      throw  new TException("Internal error");
     }
   }
 

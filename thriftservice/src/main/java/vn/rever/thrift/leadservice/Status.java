@@ -7,6 +7,10 @@
 package vn.rever.thrift.leadservice;
 
 
+import java.util.Map;
+import java.util.HashMap;
+import org.apache.thrift.TEnum;
+
 public enum Status implements org.apache.thrift.TEnum {
   LOOKING_FOR_RENTAL(0),
   RENTED(1),

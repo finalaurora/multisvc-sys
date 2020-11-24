@@ -35,4 +35,6 @@ public class ThriftClient {
       e.printStackTrace();
     }
   }
+
+
 }

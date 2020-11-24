@@ -6,6 +6,8 @@
  */
 package vn.rever.thrift.leadservice;
 
+import com.google.gson.annotations.Expose;
+
 @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
 public class Lead implements org.apache.thrift.TBase<Lead, Lead._Fields>, java.io.Serializable, Cloneable, Comparable<Lead> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Lead");
@@ -23,18 +25,27 @@ public class Lead implements org.apache.thrift.TBase<Lead, Lead._Fields>, java.i
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new LeadStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new LeadTupleSchemeFactory();
 
+  @Expose
   public long id; // required
+  @Expose
   public java.lang.String firstName; // required
+  @Expose
   public java.lang.String lastName; // required
+  @Expose
   public java.lang.String email; // required
+  @Expose
   public java.lang.String phoneNumber; // required
   /**
    * 
    * @see Status
    */
+  @Expose
   public Status userStatus; // required
+  @Expose
   public java.lang.String source; // required
+  @Expose
   public long createdDate; // required
+  @Expose
   public long updatedDate; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -329,7 +340,7 @@ public class Lead implements org.apache.thrift.TBase<Lead, Lead._Fields>, java.i
     return this.phoneNumber;
   }
 
-  public Lead setPhoneNumber(String phoneNumber) {
+  public Lead setPhoneNumber(java.lang.String phoneNumber) {
     this.phoneNumber = phoneNumber;
     return this;
   }
